@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from .models import Food, Food_Categorie
 import json
 from django.http import JsonResponse
-from rest_framework.serializers import ModelSerializer
 
 
 def Home(request):
