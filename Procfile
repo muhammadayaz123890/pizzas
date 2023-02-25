@@ -1,1 +1,1 @@
-web: gunicorn pizzerios_website.wsgi
+web: gunicorn Pizzerios_Website.wsgi
