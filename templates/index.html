@@ -1,0 +1,316 @@
+{% extends 'base.html' %}
+
+
+
+
+
+
+{% block content %}
+<title>PIZZERIOS HOME</title>
+<style>
+    
+    .outer-home-container .container{
+        min-height: 30rem;
+    }
+    .outer-home-container .container .row{
+        min-height: 30rem;
+    }
+    .outer-home-container .container .row .col h1.main-heading{
+        font-size: 5rem;
+        font-weight:900;
+        font-family: Segoe Script;
+        background: linear-gradient(to right, rgba(183, 9, 9, 0.797) , rgba(81, 255, 0, 0.778));
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        text-shadow: 0px 4px 3px red;
+    }
+    .row .col .bt{
+        width: 600px;
+        transform: rotateX(80deg);
+        left: 55%;
+        top: 75%;
+        position: absolute;
+        transform: translate(-50% , -50%);
+        z-index: 2;
+        height: 300px;
+        background-color:rgba(255, 17, 0, 0.572);
+        border-radius: 50%;
+        box-shadow: 0px 3px 5px black;
+    }
+    .row .col .bt-2{
+        width: 650px;
+        transform: rotateX(80deg);
+        left: 65%;
+        top: 65%;
+        position: absolute;
+        transform: translate(-50% , -50%);
+        z-index: 1;
+        height: 300px;
+        background-color: rgb(241, 161, 104);
+        border-radius: 50%;
+        box-shadow: 0px 0px 10px black;
+    }
+    @media screen and (max-width:600px){
+        .row .col .bt-2{
+            display: none;
+        }
+    }
+    .row .col a.about-btn:hover{
+        color: black;
+        box-shadow: 0px 3px 5px black;
+    }
+    .menu-container::-webkit-scrollbar{
+        width: 8px;
+    }
+    .menu-container::-webkit-scrollbar-thumb{
+        width: 8px;
+
+    }
+    @media screen and (max-width:900px){
+        .outer-home-container .container .row .for-none{
+            display: none;
+            width: 600px;
+            height: 300px;
+            margin-bottom: 6rem;
+        }
+    }
+    .menu-overflow::-webkit-scrollbar{
+        width: 8px;
+    }
+    .menu-container::-webkit-scrollbar-thumb{
+        width: 8px;
+    }
+    ul li.list-group-item a{
+        color: orange;
+        text-decoration: none;
+    }
+    ul li.list-group-item a:hover{
+        text-decoration: underline;
+    }
+    @media screen and (max-width:600){
+        #some-chef-id{
+            display: none;
+        }
+    }
+</style>
+
+<div class="outer-home-container" style="border: 1.2px solid orange;  min-height: 50rem; border-radius: 10px; background: linear-gradient(5deg , rgba(255, 0, 0, 0.834) , rgba(255, 166, 0, 0.807));">
+    <div class="container d-flex flex-wrap flex-lg-row flex-sm-column " >
+        <div style=" width: 100%;" class="row  d-flex  flex-wrap flex-sm-column flex-lg-row">
+            <div class="col d-flex flex-column justify-content-around align-items-center">
+                <h1 class="main-heading ">EAT<br> DRINK<br> RELAX</h1>
+                <a style="border: none; outline: none; background: linear-gradient(10deg , rgba(255, 0, 0, 0.501) , rgba(128, 0, 128, 0.646)); padding: .2rem 4rem; color: white; text-decoration: none; box-shadow: 0px 1px 3px black;" class="about-btn" href="#">About Us</a>
+                <p class="card-text">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis unde tempora quidem id voluptates quaerat. Dicta mollitia atque nisi corrupti iusto eius quo perspiciatis veritatis pariatur labore, nulla tenetur. Laudantium?
+                </p>
+            </div>
+            <div style="position: relative;" id="some-chef-id" class="col some-chef-div flex-column d-sm-flex for-none flex-wrap flex-sm-column justify-content-around align-items-end">
+                <img id="chef-png" class="chef-img"  width="500" style="z-index: 10; object-fit: contain;" height="500" src="../media/chef_header.png" alt="">
+                <div class="bt">
+                </div>
+                <div class="bt-2">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div data-aos="fade-up" data-aos-offset="300" style="background-color: gray; background-color: rgb(241, 161, 104); height: 40rem; margin-top: -5rem; box-shadow: 0px 0px 5px black; border-radius:10px; margin-bottom: 5rem;  padding: 3rem 5rem;"  class="container d-flex justify-content-center flex-row menu-container">
+    <div class="row" style="width: 30%; margin-right: 1.5rem;">
+            
+            <ul class="list-group list-group-flush" style="border-radius: 10px;">
+                <h4>Categories</h4>
+                {% for category in categories %}
+                <li class="list-group-item"><a href="" class="ajax-btn" id="{{category}}">{{category}}</a></li>
+                {% endfor %}
+            </ul>
+        
+    </div>
+
+    <div style="width: 80%; display: flex; flex-direction: column; overflow: auto;" class="menu-overflow">
+
+
+        
+        {% for food in foods %}
+        
+        <div class="col">
+            <a href="/food/?food_id={{food.id}}" style="color: white; text-decoration: none; border-radius: 10px;">
+                <div style="background: linear-gradient(20deg , orange , red);  box-shadow: 0px 0px 5px black; border-radius: 10px;" class="card mb-1" >
+                    <div class="row g-0">
+                      <div class="col-md-4 d-flex justify-content-around align-items-center"> 
+                        <img src="{{food.image.url}}" style="object-fit: contain; width: 100px; height: 100px;"  class="img-fluid rounded-start" alt="...">
+                      </div>
+                      <div class="col-md-6">
+                        <div class="card-body">
+                          <h5 class="card-title">{{food.name}}</h5>
+                          <p class="card-text"><small class="text-muted">Price : ${{food.price_now}}</small></p>
+                        </div>
+                      </div>
+                      <div style="color: green;" class="col-md-2 d-flex flex-row justify-content-around align-items-center">
+                        {% if food.available %}
+                        <div class="row">
+                            <div class="col">Available</div>
+                            <div class="col">
+                            </div>
+                        </div> 
+                        {% else %}
+                        Not Available
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<script id="for-ajax">
+
+
+    let buttons = document.querySelectorAll("a.ajax-btn");
+
+    buttons.forEach(btn => {
+        btn.addEventListener("click" , event => {
+            event.preventDefault();
+
+            // AJAX logic starts from here 
+
+            let xhr = new XMLHttpRequest();
+
+            xhr.open("GET" , `{% url 'ajax' %}?cat_name=${btn.id}` , true);
+
+            xhr.onload = function(){
+                console.log("Hello world")
+
+                // INSERTING THE FOODS IN THE PLACE LOGIC STARTS HERE
+
+                foods_container = document.querySelector("div.menu-overflow");
+
+                data = xhr.response;
+
+                all_foods = ""
+
+                data  = JSON.parse(data)
+
+                for(let i in data.foods){
+                        console.log(data.foods[i])
+                        food = `
+
+                        <div class="col">
+            <a href="/food/?food_id=${data.foods[i]['id']}" style="color: white; text-decoration: none; border-radius: 10px;">
+                <div style="background: linear-gradient(20deg , orange , red);  box-shadow: 0px 0px 5px black; border-radius: 10px;" class="card mb-1" >
+                    <div class="row g-0">
+                      <div class="col-md-4 d-flex justify-content-around align-items-center"> 
+                        <img src="media/${data.foods[i].image}" style="object-fit: contain; width: 100px; height: 100px;"  class="img-fluid rounded-start" alt="...">
+                      </div>
+                      <div class="col-md-6">
+                        <div class="card-body">
+                          <h5 class="card-title">${data.foods[i].name}</h5>
+                          <p class="card-text"><small class="text-muted">Price : $${data.foods[i].price_now} </small></p>
+                        </div>
+                      </div>
+                      <div style="color: green;" class="col-md-2 d-flex flex-row justify-content-around align-items-center">
+                        Available 
+                      </div>
+                    </div>
+                  </div>
+            </a>
+        </div>
+
+
+                                `
+                                all_foods += food
+
+                    
+                }
+                foods_container.innerHTML = all_foods
+
+
+            }
+
+            xhr.send()
+
+
+
+
+        })
+    })
+
+
+</script>
+
+
+
+
+<style>
+    .carousel-inner .carousel-item img{
+        width: 500px;
+        height: 500px;
+        object-fit: contain;
+        background-color: lavender;
+    }
+    .container #carouselId{
+        margin-bottom: 10rem;
+    }
+</style>
+<div class="container" data-aos="fade-in" 
+data-aos-offset="200">
+    <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active" aria-current="true" aria-label="First slide"></li>
+            <li data-bs-target="#carouselId" data-bs-slide-to="1" aria-label="Second slide"></li>
+            <li data-bs-target="#carouselId" data-bs-slide-to="2" aria-label="Third slide"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <h3 style="color: orange; font-weight: 900; text-shadow: 0px 0px 3px black;">Our Services</h3>
+            <div class="carousel-item active">
+                <img src="../media/pngwing.com (1).png" class="w-100 d-block" alt="First slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3 style="color: orange; font-weight: 900; text-shadow: 0px 0px 3px black;">Best Pizzas</h3>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="../media/pngwing.com (2).png" class="w-100 d-block" alt="Second slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3 style="color: orange; font-weight: 900; text-shadow: 0px 0px 3px black;">Best Burgers</h3>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="../media/pngwing.com (4).png" class="w-100 d-block" alt="Third slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3 style="color: orange; font-weight: 900; text-shadow: 0px 0px 3px black;">Chicken Fests</h3>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+
+
+
+{% include 'contact.html' %}
+
+
+
+
+
+{% include 'footer.html' %}
+
+
+
+
+
+
+{% endblock %}

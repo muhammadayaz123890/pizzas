@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+
+
+
+
+
+{% block content %}
+
+<style>
+    
+</style>
+
+{% include 'api_header.html' %}
+
+
+
+<style>
+    .quick-start-container{
+        min-height: 30rem;
+        margin-top: 5rem;
+    }
+    .quick-start-container .container-start .row.guide-row{
+        border: 1.3px solid black;
+        padding: 5rem;
+        border-radius: 10px;
+        margin-bottom: 3rem;
+
+    }
+</style>
+
+
+<div class="quick-start-container">
+    
+    <div class="container container-start">
+        
+    <div class="row" id="quick-start">
+        <h1>Quick Start Guide</h1>
+    </div>    
+    <div class="row guide-row">
+        To get access to our API, you must carefully follow and implement our quick start guide. That way you'll be able to get easy access to all of the features of our API.
+
+        <h3 style="margin-top:3rem;">Step 1</h3>
+        <span>
+            <ul>
+                <li>
+                    Create an account if you don't have one.
+                </li>
+                <li>
+                    If you already have an account, then login to your account with your password and email.
+                </li>
+            </ul>
+        </span>
+        <h3>Step 2</h3>
+        <span>
+            <ul>
+                <li>
+                    Once you are good to go with your account, go to the <a href="#subscribe">Subscribe to API</a> section to see subscriptions.
+                </li>
+                <li>
+                    Get started by subscribing to any plan that suits your needs and requirements.
+                </li>
+                <li>
+                    Once you subscribe to a plan, you'll get an API Key.
+                </li>
+                <strong class="mt-5"> 
+                    Warning! Keep your API Key to yourself.
+                </strong>
+            </ul>
+        </span>
+        <h3>Step 3</h3>
+        <span>
+            <ul>
+                <li>
+                    Once you have your API key, use this link localhost:8000/get_data/?api_key=your_api_key to access the desired data
+                </li>
+                <strong>
+                    Warning! Keep your API key to yourself or someone may miss use your key.
+                </strong>
+            </ul>
+        </span>
+    </div>
+    </div>
+</div>
+
+
+
+<style>
+    .subscribe-container{
+        min-height: 30rem;
+        margin-top: 5rem;
+    }
+    .row.subs-row{
+        border: 1.2px solid black;
+        border-radius: 10px;
+        margin-bottom: 5rem;
+        padding: 5rem;
+    }
+</style>
+
+
+
+<div class="subscribe-container">
+    <div class="container sub-container">
+        <div class="row" id="subscribe">
+            <h1>Subscriptions</h1>
+        </div>
+        <div class="row d-flex flex-wrap flex-row justify-content-around align-items-center subs-row">
+            
+            <div class="col">
+                <div class="card mt-3" style="border-radius:10px;">
+                    <div class="card-body">
+                        <div class="card-text">Freemium</div>
+                        <h2 style="text-align:center;" class="card-title mb-2 mt-5">$0/month</h2>
+                        <h5 class="mb-3 mt-5" style="color:red;">100 requests/day</h5>
+                        <p class="card-text">By subscribing to this plan, you'll be able to make 500 requests per day. </p>
+
+                        <a href="/api_subscribe/?plan=free" style="text-decoration:none; background-color: rgba(3, 3, 169, 0.777); padding: .2rem 3rem; border-radius: 3px; font-size: 1.3rem; color: white;" class="card-link">Subscribe</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="card mt-3"  style="border-radius:10px;">
+                    <div class="card-body">
+                        <div class="card-text">Basic Plan</div>
+                        <h2 style="text-align:center;" class="card-title mb-2 mt-5">$5/month</h2>
+                        <h5 class="mb-3 mt-5" style="color:green;">500 requests/day</h5>
+                        <p class="card-text">By subscribing to this plan, you'll be able to make 500 requests per day. </p>
+
+                        <a href="#" style="text-decoration:none; background-color: rgba(3, 3, 169, 0.777); padding: .2rem 3rem; border-radius: 3px; font-size: 1.3rem; color: white;" class="card-link">Subscribe</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="card mt-3" style="border-radius:10px;">
+                    <div class="card-body">
+                        <div class="card-text">Premium</div>
+                        <h2 style="text-align:center;" class="card-title mb-2 mt-5">$10/month</h2>
+                        <h5 class="mb-3 mt-5" style="color:rgb(0, 4, 128);">5000 requests/day</h5>
+                        <p class="card-text">By subscribing to this plan, you'll be able to make 500 requests per day. </p>
+
+                        <a href="#" style="text-decoration:none; background-color: rgba(3, 3, 169, 0.777); padding: .2rem 3rem; border-radius: 3px; font-size: 1.3rem; color: white;" class="card-link">Subscribe</a>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+

@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block content %}
+
+
+<style>
+    .container-food{
+        margin-top: 3rem;
+        margin-bottom: 5rem;
+    }
+    .food-container{
+        background: linear-gradient(5deg , rgba(255, 0, 0, 0.834) , rgba(255, 166, 0, 0.807));
+        width: 40%;
+        min-height: 30rem;
+        border-radius: 10px;
+        box-shadow: 3px 3px 5px black;
+    }
+    .food-container .food-card{
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+    }
+
+</style>
+
+<div class="container d-flex flex-wrap container-food d-flex justify-content-around">
+
+
+    <div class="row food-container">
+        <div class="card food-card">
+            <div class="card-img-top d-flex justify-content-around">
+                <img src="{{food.image.url}}" width="200" height="200" alt="" style="object-fit: contain;">
+            </div>
+            <div class="card-body"  style="text-align: center; ">
+                <h5 class="card-title" style="color: white; font-size: 2.1rem;" >
+                    {{food.name}}
+                </h5>
+                <h5>Price : ${{food.price_now}}</h5>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quae aperiam tenetur voluptatem, unde obcaecati enim officiis voluptatibus tempore? Vero.</p>
+                <div class="card-text d-flex justify-content-around" >
+                    <a style="text-decoration: none; display: flex ; justify-content: space-around; width: fit-content; align-items: center;" href="tel:+923325874430"><span style="margin-right: 1rem;" class="material-symbols-outlined">
+                        call
+                        </span> Order Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<style>
+    .related-row{
+        overflow: auto;
+    }
+</style>
+
+    <div class="row d-flex flex-column related-row mt-5">
+        <h2>You would also like</h2>
+        {% for some_food in related_foods %}
+        <div class="col">
+            <a href="/food/?food_id={{some_food.id}}" style="color: white; text-decoration: none; border-radius: 10px;">
+                <div style="background: linear-gradient(20deg , orange , red);  box-shadow: 0px 0px 5px black; border-radius: 10px;" class="card mb-1" >
+                    <div class="row g-0">
+                      <div class="col-md-4 d-flex justify-content-around align-items-center"> 
+                        <img src="{{some_food.image.url}}" style="object-fit: contain; width: 100px; height: 100px;"  class="img-fluid rounded-start" alt="...">
+                      </div>
+                      <div class="col-md-6">
+                        <div class="card-body">
+                          <h5 class="card-title">{{some_food.name}}</h5>
+                          <p class="card-text"><small class="text-muted">Price : ${{some_food.price_now}}</small></p>
+                        </div>
+                      </div>
+                      <div style="color: green;" class="col-md-2 d-flex flex-row justify-content-around align-items-center">
+                        {% if food.available %}
+                        <div class="row">
+                            <div class="col">Available</div>
+                            <div class="col">
+                            </div>
+                        </div> 
+                        {% else %}
+                        Not Available
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+            </a>
+        </div>
+        {% endfor %}
+        
+    </div>
+
+    
+</div>
+
+
+
+{% include 'footer.html' %}
+
+{% endblock %}
+
+

@@ -1,0 +1,76 @@
+<nav class="navbar navbar-expand-sm navbar-dark " style="background:linear-gradient(10deg , orange , red); box-shadow: 0px 3px 5px black;">
+<div class="container">
+    <h1 class="navbar-brand" style="color: red  ; font-weight: 800; font-size: 3rem; text-shadow: 0px 3px 2px white; font-family:Segoe Script;">PIZZERIOS</h1>
+    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+        aria-expanded="false" aria-label="Toggle navigation">T</button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'home' %}" aria-current="page">Home <span class="visually-hidden">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#" aria-current="page">About Us <span class="visually-hidden">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'api_console' %}" aria-current="page">Developer Console <span class="visually-hidden">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#contact-id" aria-current="page">Contact<span class="visually-hidden">(current)</span></a>
+            </li>            
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white;">Profile</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+                    <a class="dropdown-item" href="{% url 'register' %}">Register</a>
+                    <hr>
+                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                </div>
+            </li>
+        </ul>
+        <form method="get" action="{% url 'search' %}" class="d-flex my-2 my-lg-0">
+            <div class="search-input" style="display: flex; flex-direction: column; margin-right: .5rem; position: relative;">
+                <input  name="food_name" style="background:none; border: 1.8px solid white; color: orange; ;" class="form-control search-field me-sm-2" type="text" placeholder="Search Foods">
+                <!-- Hover added -->
+                <div style="display:none;" class="list-group suggestion-box" id="suggestions" style="position:absolute; top: 100%;">
+                </div>
+            </div>
+            <button class="btn btn-outline-success my-2 my-sm-0" style="height:2.3rem; display:flex; justify-content: center; align-items:center;" type="submit">Search</button>
+        </form>
+    </div>
+</div>
+</nav>
+
+
+
+<script id="search-suggestions">
+    let sug_container = document.querySelector("div.suggestion-box#suggestions");
+    let search_input = document.querySelector("div.search-input input.search-field");
+    sum_obj = ""
+    search_input.addEventListener("keyup" , event => {
+        let search_value = search_input.value;
+        xhr_4 = new XMLHttpRequest();
+        xhr_4.open("GET" , `{% url "search" %}?food_name=${search_value}` , true);
+        xhr_4.onload = function(event){
+            data = xhr_4.response 
+            data = JSON.parse(data)
+            for(food in data){
+                if(food == 'Foods'){
+                    sum_obj  = ""
+                    len_ = 0
+                    for(key in data[food]){           
+                        if(len_ < 5){
+                            i_object = `<a href="/food/?food_id=${data[food][key]['id']}" class="list-group-item list-group-item-action" style="min-width:10rem; background:linear-gradient(20deg, red , orange); color: white;">${data[food][key]['name']}</a>`
+                        sum_obj += i_object
+                        }
+                        len_ += 1
+                    }
+                                sug_container.style.display = 'block'
+                                sug_container.style.position = 'absolute';
+                                sug_container.style.top = '100%';
+                                sug_container.innerHTML  = sum_obj
+                }
+            }
+        }
+        xhr_4.send()
+    })
+</script>

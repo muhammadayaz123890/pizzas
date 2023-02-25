@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+
+
+
+
+{% block content %}
+
+<style>
+    .container.subs-container-h{
+        min-height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;flex-direction: column;
+    }
+    .container .row{
+        border: 1.2px solid black;
+        text-align: center;
+        padding: 5rem;
+        border-radius: 10px;
+        width: 100%;
+
+    }
+    .container.subs-container-h .row .col a{
+        background-color: blue;
+        color: white;
+        padding: 1rem 15rem;
+        text-decoration: none;
+        cursor: pointer;
+        border-radius: 10px;
+        font-size: 20px;
+    }
+    .container.subs-container-h .row .col a:hover{
+        box-shadow: 0px 0px 5px black;
+    }
+</style>
+
+
+
+<div class="container subs-container-h">
+    <div class="row">
+        <div class="col w-100">
+            Click the Subscribe Button to get access to <strong style="color:red; text-transform: uppercase;">{{plan}}</strong> plan
+        </div>
+        <div class="col">
+            {% if request.user.is_authenticated %}
+            <a class="btn-subs" href="{% url 'add_subscription' %}?sub={{plan}}">Subscribe</a>
+            {% else %}
+            <a class="btn-subs" href="{% url 'login' %}">Subscribe</a>
+            {% endif %}
+        </div>
+    </div>
+
+
+
+    <div class="row mt-5">
+        <div class="col">
+            <h4>API Key</h4>
+        </div>
+        <div style="font-size:2rem;" class="col">
+            :
+        </div>
+        <div class="col">
+            <h5 class="key-place">
+                dfjaslkj384098dsfajkh3i2y84uradhfskjh kh;
+            </h5>
+        </div>
+    </div>
+</div>
+
+
+<script id="for-subscription">
+    
+    
+    let btns = document.querySelectorAll("a.btn-subs");
+
+    btns.forEach(btn => {
+        btn.addEventListener("click" , (event) => {
+        event.preventDefault();
+
+        console.log("Btn has been clicked")
+
+        let xhr_3 = new XMLHttpRequest();
+
+        xhr_3.open("GET" , "{% url 'add_subscription' %}?sub={{plan}}" , true);
+
+        xhr_3.onload = function(event){
+            data = xhr_3.response
+
+            data = JSON.parse(data)
+
+            key = data.key
+
+            document.querySelector("h5.key-place").innerText = key
+            
+        }
+        
+
+        xhr_3.send();
+
+    })
+    })
+
+
+
+</script>
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
